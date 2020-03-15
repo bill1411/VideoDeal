@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoDeal"
         mc:Ignorable="d"
-        Title="视频处理" Height="600" Width="900">
-    <Grid>
+        Title="视频处理" Height="416" Width="678" ResizeMode="CanMinimize">
+    <Grid Margin="0,0,0,152">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="565*"/>
+            <ColumnDefinition Width="31*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <MediaElement Name="MediaPlayer" LoadedBehavior="Manual" Margin="0,0,-33,-85" />
+        </Grid>
+
+        <Button Content="添加视频" HorizontalAlignment="Left" Height="35" Margin="18,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnAddVideo_Click"/>
+        <Button Content="播放视频" HorizontalAlignment="Left" Height="35" Margin="108,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnPlay_Click"/>
+        <Button Content="左转90度" HorizontalAlignment="Left" Height="35" Margin="198,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnLeft90_Click"/>
+        <Button Content="右转90度" HorizontalAlignment="Left" Height="35" Margin="288,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnRight90_Click"/>
+        <Button Content="添加水印" HorizontalAlignment="Left" Height="35" Margin="378,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnAddWaterMark_Click" RenderTransformOrigin="1,0.6"/>
+        <Button Content="上传视频" HorizontalAlignment="Left" Height="35" Margin="558,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnUpload_Click" Grid.ColumnSpan="2"  />
+        <Button Content="截    图" HorizontalAlignment="Left" Height="35" Margin="468,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnCutImg_Click" />
 
     </Grid>
 </Window>
