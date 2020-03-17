@@ -5,23 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoDeal"
         mc:Ignorable="d"
-        Title="视频处理" Height="416" Width="678" ResizeMode="CanMinimize">
-    <Grid Margin="0,0,0,152">
+        Title="视频处理" Height="655.87" Width="1130" ResizeMode="CanMinimize">
+    <Grid Margin="0,0,4,152">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="565*"/>
             <ColumnDefinition Width="31*"/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <MediaElement Name="MediaPlayer" LoadedBehavior="Manual" Margin="0,0,-33,-85" />
+            <MediaElement Name="MediaPlayer" LoadedBehavior="Manual" Margin="63,61,0,56" HorizontalAlignment="Left" Width="721" />
+            <Label Content="VideoId:" HorizontalAlignment="Left" Margin="820,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.192,0.126" Height="37"/>
+            <TextBox Name="txtVideoId" IsReadOnly="True" HorizontalAlignment="Left" Height="28" Margin="820,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+            <Label Content="VideoAuth:" HorizontalAlignment="Left" Margin="820,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.591,-0.372" Height="38"/>
+            <TextBlock Name="txtVideoAuth"  HorizontalAlignment="Left" Margin="820,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="141" Width="177"/>
+            <Label Content="VideoAddress:" HorizontalAlignment="Left" Margin="820,265,0,0" VerticalAlignment="Top" Height="37"/>
+            <TextBox Name="txtVideoAddress" IsReadOnly="True" Height="27" Margin="820,296,73,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <Image Name="copyVideoId" HorizontalAlignment="Left" Height="24" Margin="1013,46,0,0" MouseLeftButtonDown="clikc_copy_void_id" VerticalAlignment="Top" Width="27"/>
+            <Image x:Name="copyVideoAuth" HorizontalAlignment="Left" Height="24" Margin="1013,111,0,0" MouseLeftButtonDown="clikc_copy_void_auth" VerticalAlignment="Top" Width="27"/>
+            <Image x:Name="copyVideoAddress" HorizontalAlignment="Left" Height="24" Margin="1013,299,0,0" MouseLeftButtonDown="clikc_copy_void_address" VerticalAlignment="Top" Width="27"/>
+            <Label Content="客户姓名:" HorizontalAlignment="Left" Margin="820,340,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="txtCustomerName" HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="820,380,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
+
+
+
         </Grid>
 
-        <Button Content="添加视频" HorizontalAlignment="Left" Height="35" Margin="18,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnAddVideo_Click"/>
-        <Button Content="播放视频" HorizontalAlignment="Left" Height="35" Margin="108,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnPlay_Click"/>
-        <Button Content="左转90度" HorizontalAlignment="Left" Height="35" Margin="198,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnLeft90_Click"/>
-        <Button Content="右转90度" HorizontalAlignment="Left" Height="35" Margin="288,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnRight90_Click"/>
-        <Button Content="添加水印" HorizontalAlignment="Left" Height="35" Margin="378,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnAddWaterMark_Click" RenderTransformOrigin="1,0.6"/>
-        <Button Content="上传视频" HorizontalAlignment="Left" Height="35" Margin="558,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnUpload_Click" Grid.ColumnSpan="2"  />
-        <Button Content="截    图" HorizontalAlignment="Left" Height="35" Margin="468,333,0,-143" VerticalAlignment="Top" Width="85" Click="btnCutImg_Click" />
+        <Button Content="添加视频" HorizontalAlignment="Left" Height="35" Margin="154,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnAddVideo_Click"/>
+        <Button Content="播放视频" HorizontalAlignment="Left" Height="35" Margin="244,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnPlay_Click"/>
+        <Button Content="左转90度" HorizontalAlignment="Left" Height="35" Margin="334,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnLeft90_Click"/>
+        <Button Content="右转90度" HorizontalAlignment="Left" Height="35" Margin="424,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnRight90_Click"/>
+        <Button Content="添加水印" HorizontalAlignment="Left" Height="35" Margin="514,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnAddWaterMark_Click" RenderTransformOrigin="1,0.6"/>
+        <Button Content="获取imgUrl及videoUrl并生成Sql语句" HorizontalAlignment="Left" Height="35" Margin="784,533,0,-136" VerticalAlignment="Top" Width="209" Click="btnCutImg_Click" />
+        <Button Content="获取上传参数" HorizontalAlignment="Left" Height="35" Margin="604,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnUpload_Click" />
+        <Button Content="打开上传页面" HorizontalAlignment="Left" Height="35" Margin="694,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnOpenHtml_Click"  />
+        <Label Content="Sql语句" HorizontalAlignment="Left" Height="27" Margin="821,418,0,-13" VerticalAlignment="Top"/>
+        <TextBox Name="txtSql" HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="821,452,0,-43" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="172"/>
+        <Image x:Name="copySql" HorizontalAlignment="Left" Height="24" Margin="1013,450,0,-42" MouseLeftButtonDown="clikc_copy_sql" VerticalAlignment="Top" Width="27"/>
 
     </Grid>
 </Window>
