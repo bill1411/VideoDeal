@@ -59,7 +59,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="aliyun-net-sdk-core, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -105,6 +105,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helper\ALiYunHelper.cs" />
     <Compile Include="Helper\CutImgHelper.cs" />
     <Compile Include="Helper\ffmpegHelper.cs" />
     <Compile Include="Helper\StartThirdExeHelper.cs" />
@@ -155,6 +156,12 @@
   <ItemGroup>
     <Content Include="ffmpeg\ffmpeg.exe" />
     <Content Include="ffmpeg\ffplay.exe" />
+    <Content Include="Html\lib\aliyun-upload-sdk\aliyun-oss-sdk-5.3.1.min.js" />
+    <Content Include="Html\lib\aliyun-upload-sdk\aliyun-upload-sdk-1.5.0.min.js" />
+    <Content Include="Html\lib\aliyun-upload-sdk\es6-promise.min.js" />
+    <Content Include="Html\lib\jquery.min.js" />
+    <Content Include="Html\UploadVideo.html" />
+    <Resource Include="Img\icon\copy.png" />
     <Content Include="watermark\EasyVideoLogoRemover.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
