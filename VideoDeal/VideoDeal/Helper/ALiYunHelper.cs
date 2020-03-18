@@ -304,13 +304,13 @@ namespace VideoDeal.Helper
             //需要截图的视频ID(推荐传递截图模板ID)
             request.VideoId = videoId;
             //截图模板ID [可在阿里云后台配置模板ID]  当然也可以在下面参数中定义截图宽高等信息
-            request.SnapshotTemplateId = "1111111";
+            request.SnapshotTemplateId = "";
             //如果设置了SnapshotTemplateId，会忽略下面参数
-            request.Count = 50;
-            request.SpecifiedOffsetTime = 0;
-            request.Interval = 1;
-            request.Width = "200";
-            request.Height = "200";
+            request.Count = 1;                  //截图的最大数量。默认值：1
+            request.SpecifiedOffsetTime = 0;    //截图指定时间的起始点，单位：毫秒。默认值：0
+            request.Interval = 1;               //截图间隔时间
+            request.Width = "640";
+            request.Height = "360";
             request.SpriteSnapshotConfig = BuildSnapshotTemplateConfig();
             return client.GetAcsResponse(request);
         }
