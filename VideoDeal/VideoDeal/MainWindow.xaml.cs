@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -36,6 +37,10 @@ namespace VideoDeal
         /// 视频过滤条件
         /// </summary>
         private static readonly string videoFilter = "MP4文件|*.mp4|flv文件|*.flv";
+        /// <summary>
+        /// 真正上传时，文件的名字
+        /// </summary>
+        private static string realVideoName = string.Empty;
 
         public MainWindow()
         {
@@ -52,9 +57,22 @@ namespace VideoDeal
         }
 
         #region 打开视频
+        /// <summary>
+        /// 打开视频  原视频命名规则：20200313-2 常铭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddVideo_Click(object sender, RoutedEventArgs e)
         {
             videoPath = OpenFileDialog(fileFilter);
+            //获取客户姓名及标的序号
+            string name = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[1];
+            string bind = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[0];
+            //给客户名及标的序号赋值
+            this.txtCustomerName.Text = name;
+            realVideoName = "标的号：" + bind + " 入库视频";
+            //把正常的文件名传给标题
+            this.Main.Title = realVideoName;
         }
         #endregion
 
@@ -67,8 +85,6 @@ namespace VideoDeal
                 bool result = ffmpegHelper.VideoRotate(videoPath, dealVideFilePath, "2");
                 if (result)
                     MessageBox.Show("操作成功");
-                else
-                    MessageBox.Show("操作失败");
             }
             else
                 MessageBox.Show("未添加源视频");
@@ -84,8 +100,6 @@ namespace VideoDeal
                 bool result = ffmpegHelper.VideoRotate(videoPath, dealVideFilePath, "1");
                 if (result)
                     MessageBox.Show("操作成功");
-                else
-                    MessageBox.Show("操作失败");
             }
             else
                 MessageBox.Show("未添加源视频");
@@ -122,7 +136,7 @@ namespace VideoDeal
             //获取文件路径
             string videoPath = OpenFileDialog(fileFilter);
             //获取文件名
-            string title = System.IO.Path.GetFileNameWithoutExtension(videoPath);
+            string title = realVideoName; //System.IO.Path.GetFileNameWithoutExtension(videoPath);
             //获取上传视频的参数
             ALiYunHelper.GetVideoUploadParameter(title,videoPath);
             txtVideoId.Text = ALiYunHelper.videoId;
@@ -174,7 +188,7 @@ namespace VideoDeal
         #region 打开上传页面
         private void btnOpenHtml_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://api.clxchina.cn:9099/aliyun_video_upload/video-upload.html");
+            Process.Start(ConfigurationSettings.AppSettings["LocalUrl"].ToString());
         }
         #endregion
 
