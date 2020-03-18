@@ -2,6 +2,7 @@
 using Aliyun.Acs.Core.Exceptions;
 using Aliyun.Acs.Core.Profile;
 using Aliyun.Acs.vod.Model.V20170321;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -189,6 +190,152 @@ namespace VideoDeal.Helper
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+        #endregion
+
+        #region 提交截图作业  需要更高的权限
+        /// <summary>
+        /// 提交截图作业  需要更高的权限
+        /// </summary>
+        public static void SubmitSnapshotJob()
+        {
+            try
+            {
+                // 发起请求，并得到 response
+                SubmitSnapshotJobResponse response = SubmitSnapshotJob(client);
+                Console.WriteLine("RequestId = " + response.RequestId);
+            }
+            catch (ServerException e)
+            {
+                if (e.RequestId != null)
+                {
+                    Console.WriteLine("RequestId = " + e.RequestId);
+                }
+                Console.WriteLine("ErrorCode = " + e.ErrorCode);
+                Console.WriteLine("ErrorMessage = " + e.ErrorMessage);
+            }
+            catch (ClientException e)
+            {
+                if (e.RequestId != null)
+                {
+                    Console.WriteLine("RequestId = " + e.RequestId);
+                }
+                Console.WriteLine("ErrorCode = " + e.ErrorCode);
+                Console.WriteLine("ErrorMessage = " + e.ErrorMessage);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ErrorMessage = " + e.ToString());
+            }
+        }
+        #endregion
+
+        #region 查询截图信息 需要更高的权限
+        /// <summary>
+        /// 查询截图信息 需要更高的权限
+        /// </summary>
+        public static void SearchSnapshotJob()
+        {
+            try
+            {
+                // 发起请求，并得到 response
+                ListSnapshotsResponse response = ListSnapshots(client);
+                if(response.MediaSnapshot.Snapshots.Count>0)
+                foreach (var item in response.MediaSnapshot.Snapshots)
+                {
+                    Console.WriteLine("图片的Url地址： " + item.Url);
+                } 
+            }
+            catch (ServerException e)
+            {
+                if (e.RequestId != null)
+                {
+                    Console.WriteLine("RequestId = " + e.RequestId);
+                }
+                Console.WriteLine("ErrorCode = " + e.ErrorCode);
+                Console.WriteLine("ErrorMessage = " + e.ErrorMessage);
+            }
+            catch (ClientException e)
+            {
+                if (e.RequestId != null)
+                {
+                    Console.WriteLine("RequestId = " + e.RequestId);
+                }
+                Console.WriteLine("ErrorCode = " + e.ErrorCode);
+                Console.WriteLine("ErrorMessage = " + e.ErrorMessage);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ErrorMessage = " + e.ToString());
+            }
+        }
+        #endregion
+
+        #region 构建查询截图作业参数 【私有方法】
+        /// <summary>
+        /// 构建查询截图作业参数 【私有方法】
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns>ListSnapshotsResponse</returns>
+        private static ListSnapshotsResponse ListSnapshots(DefaultAcsClient client)
+        {
+            // 构造请求
+            ListSnapshotsRequest request = new ListSnapshotsRequest();
+            // 视频ID
+            request.VideoId = videoId;
+            // 截图类型
+            request.SnapshotType = "CoverSnapshot";
+            request.PageNo = "1";
+            request.PageSize = "20";
+            return client.GetAcsResponse(request);
+        }
+        #endregion
+
+        #region  构建截图作业参数【私有方法】
+        /// <summary>
+        /// 构建截图作业参数【私有方法】  备注：截图模板ID在阿里云后台创建
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        private static SubmitSnapshotJobResponse SubmitSnapshotJob(DefaultAcsClient client)
+        {
+            // 构造请求
+            SubmitSnapshotJobRequest request = new SubmitSnapshotJobRequest();
+            //需要截图的视频ID(推荐传递截图模板ID)
+            request.VideoId = videoId;
+            //截图模板ID [可在阿里云后台配置模板ID]  当然也可以在下面参数中定义截图宽高等信息
+            request.SnapshotTemplateId = "1111111";
+            //如果设置了SnapshotTemplateId，会忽略下面参数
+            request.Count = 50;
+            request.SpecifiedOffsetTime = 0;
+            request.Interval = 1;
+            request.Width = "200";
+            request.Height = "200";
+            request.SpriteSnapshotConfig = BuildSnapshotTemplateConfig();
+            return client.GetAcsResponse(request);
+        }
+        #endregion
+
+        #region 构建雪碧图截图配置【私有方法】
+
+        /// <summary>
+        /// 构建雪碧图截图配置【私有方法】
+        /// </summary>
+        /// <returns>雪碧图截图配置.</returns>
+        private static string BuildSnapshotTemplateConfig()
+        {
+            // 覆盖参数
+            JObject spriteSnapshotConfig = new JObject();
+            spriteSnapshotConfig.Add("CellWidth", "120");
+            spriteSnapshotConfig.Add("CellHeight", "68");
+            spriteSnapshotConfig.Add("Columns", "3");
+            spriteSnapshotConfig.Add("Lines", "10");
+            spriteSnapshotConfig.Add("Padding", "20");
+            spriteSnapshotConfig.Add("Margin", "50");
+            //保留雪碧图原始图
+            spriteSnapshotConfig.Add("KeepCellPic", "keep");
+            spriteSnapshotConfig.Add("Color", "tomato");
+            return spriteSnapshotConfig.ToString();
         }
         #endregion
 
