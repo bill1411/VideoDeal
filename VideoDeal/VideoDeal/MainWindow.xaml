@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoDeal"
         mc:Ignorable="d"
-        Title="视频处理" Name="Main" Height="655.87" Width="1130" ResizeMode="CanMinimize">
+        Title="视频处理" Name="Main" Height="674.19" Width="1130" ResizeMode="CanMinimize">
     <Grid Margin="0,0,4,152">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="565*"/>
@@ -29,17 +29,18 @@
 
         </Grid>
 
-        <Button Content="添加视频" HorizontalAlignment="Left" Height="35" Margin="154,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnAddVideo_Click"/>
-        <Button Content="播放视频" HorizontalAlignment="Left" Height="35" Margin="244,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnPlay_Click"/>
-        <Button Content="左转90度" HorizontalAlignment="Left" Height="35" Margin="334,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnLeft90_Click"/>
-        <Button Content="右转90度" HorizontalAlignment="Left" Height="35" Margin="424,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnRight90_Click"/>
-        <Button Content="添加水印" HorizontalAlignment="Left" Height="35" Margin="514,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnAddWaterMark_Click" RenderTransformOrigin="1,0.6"/>
-        <Button Content="获取imgUrl及videoUrl并生成Sql语句" HorizontalAlignment="Left" Height="35" Margin="784,533,0,-136" VerticalAlignment="Top" Width="209" Click="btnCutImg_Click" />
-        <Button Content="获取上传参数" HorizontalAlignment="Left" Height="35" Margin="604,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnUpload_Click" />
-        <Button Content="打开上传页面" HorizontalAlignment="Left" Height="35" Margin="694,533,0,-136" VerticalAlignment="Top" Width="85" Click="btnOpenHtml_Click"  />
+        <Button Content="1.添加视频" HorizontalAlignment="Left" Height="35" Margin="149,524,0,-78" VerticalAlignment="Top" Width="85" Click="btnAddVideo_Click"/>
+        <Button Content="2.播放视频" HorizontalAlignment="Left" Height="35" Margin="239,524,0,-78" VerticalAlignment="Top" Width="85" Click="btnPlay_Click"/>
+        <Button Content="左转90度" HorizontalAlignment="Left" Height="35" Margin="329,524,0,-78" VerticalAlignment="Top" Width="85" Click="btnLeft90_Click"/>
+        <Button Content="右转90度" HorizontalAlignment="Left" Height="35" Margin="419,524,0,-78" VerticalAlignment="Top" Width="85" Click="btnRight90_Click"/>
+        <Button Content="3.添加水印" HorizontalAlignment="Left" Height="35" Margin="509,524,0,-78" VerticalAlignment="Top" Width="85" Click="btnAddWaterMark_Click" RenderTransformOrigin="1,0.6"/>
+        <Button Content="6.获取imgUrl及videoUrl并生成Sql语句" HorizontalAlignment="Left" Height="35" Margin="781,524,0,-78" VerticalAlignment="Top" Width="219" Click="btnCutImg_Click" />
+        <Button Content="4.获取上传参数" HorizontalAlignment="Left" Height="35" Margin="599,524,0,-78" VerticalAlignment="Top" Width="85" Click="btnUpload_Click" />
+        <Button Content="5.打开上传页面" HorizontalAlignment="Left" Height="35" Margin="689,524,0,-78" VerticalAlignment="Top" Width="87" Click="btnOpenHtml_Click"  />
         <Label Content="Sql语句" HorizontalAlignment="Left" Height="27" Margin="821,418,0,-13" VerticalAlignment="Top"/>
         <TextBox Name="txtSql" HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="821,452,0,-43" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="172"/>
         <Image x:Name="copySql" HorizontalAlignment="Left" Height="24" Margin="1013,450,0,-42" MouseLeftButtonDown="clikc_copy_sql" VerticalAlignment="Top" Width="27"/>
+        <Label Content="ps:添加视频是文件名应该是 '20200404-2 姓名'" HorizontalAlignment="Left" Height="35" Margin="74,484,0,-25" VerticalAlignment="Top" Width="340" FontSize="14"/>
 
     </Grid>
 </Window>
