@@ -65,14 +65,19 @@ namespace VideoDeal
         private void btnAddVideo_Click(object sender, RoutedEventArgs e)
         {
             videoPath = OpenFileDialog(fileFilter);
-            //获取客户姓名及标的序号
-            string name = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[1];
-            string bind = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[0];
-            //给客户名及标的序号赋值
-            this.txtCustomerName.Text = name;
-            realVideoName = "标的号：" + bind + " 入库视频";
-            //把正常的文件名传给标题
-            this.Main.Title = realVideoName;
+            if (!string.IsNullOrWhiteSpace(videoPath))
+            {
+                //获取客户姓名及标的序号
+                string name = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[1];
+                string bind = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[0];
+                //给客户名及标的序号赋值
+                this.txtCustomerName.Text = name;
+                realVideoName = "标的号：" + bind + " 入库视频";
+                //把正常的文件名传给标题
+                this.Main.Title = realVideoName;
+            }
+            else
+                MessageBox.Show("请选择文件");
         }
         #endregion
 
@@ -138,7 +143,7 @@ namespace VideoDeal
             //获取文件名
             string title = realVideoName; //System.IO.Path.GetFileNameWithoutExtension(videoPath);
             //获取上传视频的参数
-            ALiYunHelper.GetVideoUploadParameter(title,videoPath);
+            ALiYunHelper.GetVideoUploadParameter(title, videoPath);
             txtVideoId.Text = ALiYunHelper.videoId;
             txtVideoAuth.Text = ALiYunHelper.videoToken;
             txtVideoAddress.Text = ALiYunHelper.videoAddress;
@@ -151,11 +156,17 @@ namespace VideoDeal
         {
             if (string.IsNullOrWhiteSpace(videoPath))
             {
-                MessageBox.Show("未添加源视频","系统提示：",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show("未添加源视频", "系统提示：", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+
+            //VlcVideo.Play("http://**************/******.flv");//只能播放网络流视频
+            //VlcVideo.Uid(new System.IO.FileInfo(@"f:\1.flv"));//本地视频
+            //VlcVideo.Play();
+
             MediaPlayer.Source = new Uri(videoPath);
             MediaPlayer.Play();
+            //SetVlcControl(videoPath);
         }
         #endregion
 
@@ -194,7 +205,7 @@ namespace VideoDeal
 
         #region 拷贝上传地址
         private void clikc_copy_void_address(object sender, RoutedEventArgs e)
-        { 
+        {
             Clipboard.SetText(this.txtVideoAddress.Text);
             MessageBox.Show("数据复制成功");
 
@@ -267,9 +278,56 @@ namespace VideoDeal
             if (sfd.ShowDialog() == true)
                 return sfd.FileName;
             else
-                return "" ;
+                return "";
         }
         #endregion
 
+        #region 支持文件拖拽到主面板上  需要开通AllowDrop属性
+        private void Main_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
+            {
+                videoPath = ((System.Array)e.Data.GetData(System.Windows.DataFormats.FileDrop)).GetValue(0).ToString();
+            }
+
+            if (!string.IsNullOrWhiteSpace(videoPath))
+            {
+                //获取客户姓名及标的序号
+                string name = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[1];
+                string bind = System.IO.Path.GetFileNameWithoutExtension(videoPath).Split(' ')[0];
+                //给客户名及标的序号赋值
+                this.txtCustomerName.Text = name;
+                realVideoName = "标的号：" + bind + " 入库视频";
+                //把正常的文件名传给标题
+                this.Main.Title = realVideoName;
+            }
+            else
+                MessageBox.Show("请选择文件");
+        }
+        #endregion
+
+        #region VlcControl
+        //private void SetVlcControl(string filePath)
+        //{
+        //    //VLC播放器的安装位置，我的VLC播放器安装在D:\Program Files (x86)\VideoLAN\VLC文件夹下。
+        //    string currentDirectory = @"D:\Program Files\VideoLAN\VLC";
+        //    var vlcLibDirectory = new DirectoryInfo(currentDirectory);
+
+        //    var options = new string[]
+        //    {
+        //        //添加日志
+        //        "--file-logging", "-vvv", "--logfile=Logs.log"
+        //        // VLC options can be given here. Please refer to the VLC command line documentation.
+        //    };
+        //    //初始化播放器
+        //    this.VlcVideo.SourceProvider.CreatePlayer(vlcLibDirectory, options);
+
+        //    // Load libvlc libraries and initializes stuff. It is important that the options (if you want to pass any) and lib directory are given before calling this method.
+        //    //设置播放源
+        //    //this.VlcVideo.SourceProvider.MediaPlayer.Play(new Uri(@"H:\DZBStudyRecord\2019-5-9VLCTest\VLCTest\FFMETest\wuyawang.mp4"));//本地文件。
+        //    this.VlcVideo.SourceProvider.MediaPlayer.Play(new Uri(filePath));//Rtsp流文件。
+        //    //this.VlcVideo.SourceProvider.MediaPlayer.Play(new Uri("rtmp://10.160.64.244:1935/live/room"));
+        //}
+        #endregion
     }
 }

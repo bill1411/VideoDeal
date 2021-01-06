@@ -1,29 +1,31 @@
-﻿<Window x:Class="VideoDeal.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoDeal"
+        xmlns:Wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf" x:Class="VideoDeal.MainWindow"
         mc:Ignorable="d"
-        Title="视频处理" Name="Main" Height="674.19" Width="1130" ResizeMode="CanMinimize">
+        AllowDrop="True"
+        Title="视频处理" x:Name="Main" Height="674.19" Width="1130" ResizeMode="CanMinimize" Drop="Main_Drop">
     <Grid Margin="0,0,4,152">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="565*"/>
             <ColumnDefinition Width="31*"/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <MediaElement Name="MediaPlayer" LoadedBehavior="Manual" Margin="63,61,0,56" HorizontalAlignment="Left" Width="721" />
             <Label Content="VideoId:" HorizontalAlignment="Left" Margin="820,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.192,0.126" Height="37"/>
-            <TextBox Name="txtVideoId" IsReadOnly="True" HorizontalAlignment="Left" Height="28" Margin="820,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
+            <TextBox x:Name="txtVideoId" IsReadOnly="True" HorizontalAlignment="Left" Height="28" Margin="820,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
             <Label Content="VideoAuth:" HorizontalAlignment="Left" Margin="820,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.591,-0.372" Height="38"/>
-            <TextBlock Name="txtVideoAuth"  HorizontalAlignment="Left" Margin="820,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="141" Width="177"/>
+            <TextBlock x:Name="txtVideoAuth"  HorizontalAlignment="Left" Margin="820,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="141" Width="177"/>
             <Label Content="VideoAddress:" HorizontalAlignment="Left" Margin="820,265,0,0" VerticalAlignment="Top" Height="37"/>
-            <TextBox Name="txtVideoAddress" IsReadOnly="True" Height="27" Margin="820,296,73,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-            <Image Name="copyVideoId" HorizontalAlignment="Left" Height="24" Margin="1013,46,0,0" MouseLeftButtonDown="clikc_copy_void_id" VerticalAlignment="Top" Width="27"/>
+            <TextBox x:Name="txtVideoAddress" IsReadOnly="True" Height="27" Margin="820,296,73,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+            <Image x:Name="copyVideoId" HorizontalAlignment="Left" Height="24" Margin="1013,46,0,0" MouseLeftButtonDown="clikc_copy_void_id" VerticalAlignment="Top" Width="27"/>
             <Image x:Name="copyVideoAuth" HorizontalAlignment="Left" Height="24" Margin="1013,111,0,0" MouseLeftButtonDown="clikc_copy_void_auth" VerticalAlignment="Top" Width="27"/>
             <Image x:Name="copyVideoAddress" HorizontalAlignment="Left" Height="24" Margin="1013,299,0,0" MouseLeftButtonDown="clikc_copy_void_address" VerticalAlignment="Top" Width="27"/>
             <Label Content="客户姓名:" HorizontalAlignment="Left" Margin="820,340,0,0" VerticalAlignment="Top"/>
-            <TextBox Name="txtCustomerName" HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="820,380,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
+            <TextBox x:Name="txtCustomerName" HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="820,380,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
+            <MediaElement x:Name="MediaPlayer" HorizontalAlignment="Left" Height="473" Margin="10,10,0,0" VerticalAlignment="Top" Width="784" LoadedBehavior="Manual"/>
 
 
 
@@ -38,7 +40,7 @@
         <Button Content="4.获取上传参数" HorizontalAlignment="Left" Height="35" Margin="599,524,0,-78" VerticalAlignment="Top" Width="85" Click="btnUpload_Click" />
         <Button Content="5.打开上传页面" HorizontalAlignment="Left" Height="35" Margin="689,524,0,-78" VerticalAlignment="Top" Width="87" Click="btnOpenHtml_Click"  />
         <Label Content="Sql语句" HorizontalAlignment="Left" Height="27" Margin="821,418,0,-13" VerticalAlignment="Top"/>
-        <TextBox Name="txtSql" HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="821,452,0,-43" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="172"/>
+        <TextBox x:Name="txtSql" HorizontalAlignment="Left" IsReadOnly="True" Height="23" Margin="821,452,0,-43" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="172"/>
         <Image x:Name="copySql" HorizontalAlignment="Left" Height="24" Margin="1013,450,0,-42" MouseLeftButtonDown="clikc_copy_sql" VerticalAlignment="Top" Width="27"/>
         <Label Content="ps:添加视频是文件名应该是 '20200404-2 姓名'" HorizontalAlignment="Left" Height="35" Margin="74,484,0,-25" VerticalAlignment="Top" Width="340" FontSize="14"/>
 
